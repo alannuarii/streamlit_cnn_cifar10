@@ -40,13 +40,14 @@ if menu == "Deteksi Objek":
 
     if uploaded_file is not None:
         img = image.load_img(uploaded_file)
-        img_array = image.img_to_array(img)
+        img_processed = img.resize((32, 32))
+        img_array = image.img_to_array(img_processed)
         img_array = np.expand_dims(img_array, axis=0) / 255.0  # Normalisasi
 
         predicted_class, confidence, predictions = mdl.predict_image(model, img_array)
 
         st.subheader("Gambar yang Diupload:")
-        st.image(img, caption="Gambar Masukan", use_container_width=True)
+        st.image(img, use_container_width=True)
 
         st.subheader("Hasil Prediksi:")
         col1, col2 = st.columns(2)
