@@ -24,4 +24,4 @@ def plot_training_metrics(df_history):
 
 #Distribusi Jumlah Data per Kelas (Training Set)
 def show_class_distribution(distribution_df):
-    st.bar_chart(distribution_df.set_index('Kelas'))
+    st.bar_chart(distribution_df.set_index('Class'))
