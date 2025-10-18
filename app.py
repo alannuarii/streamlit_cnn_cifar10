@@ -13,7 +13,7 @@ model_loaded = model.load_cnn_model()
 
 # Initialize active menu in session_state
 if 'menu' not in st.session_state:
-    st.session_state.menu = 'Object Detection'
+    st.session_state.menu = 'Image Classification'
 
 def set_menu(menu_name):
     st.session_state.menu = menu_name
@@ -21,8 +21,8 @@ def set_menu(menu_name):
 # Sidebar with menu buttons
 st.sidebar.image("assets/img/Logo-BO-01-1.png")
 st.sidebar.title("Navigation Menu")
-if st.sidebar.button('Object Detection', width="stretch"):
-    set_menu('Object Detection')
+if st.sidebar.button('Image Classification', width="stretch"):
+    set_menu('Image Classification')
 if st.sidebar.button('Model Characteristics', width="stretch"):
     set_menu('Model Characteristics')
 if st.sidebar.button('Dataset Characteristics', width="stretch"):
@@ -30,8 +30,8 @@ if st.sidebar.button('Dataset Characteristics', width="stretch"):
 
 menu = st.session_state.menu
 
-if menu == "Object Detection":
-    st.header("Object Detection with CNN | CIFAR-10")
+if menu == "Image Classification":
+    st.header("Image Classification with CNN | CIFAR-10")
     uploaded_file = st.file_uploader("Upload image sample for class prediction", type=["png", "jpg", "jpeg"])
     if uploaded_file is not None:
         img = image.load_img(uploaded_file)
