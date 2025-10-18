@@ -11,6 +11,9 @@ class_names = data.get_class_names()
 # Load the trained CNN model
 model_loaded = model.load_cnn_model()
 
+# Data for the team members (Group 3)
+team_members = data.get_team_members()
+
 # Initialize active menu in session_state
 if 'menu' not in st.session_state:
     st.session_state.menu = 'Image Classification'
@@ -27,6 +30,8 @@ if st.sidebar.button('Model Characteristics', width="stretch"):
     set_menu('Model Characteristics')
 if st.sidebar.button('Dataset Characteristics', width="stretch"):
     set_menu('Dataset Characteristics')
+if st.sidebar.button('Team Members', width="stretch"):
+    set_menu('Team Members')
 
 menu = st.session_state.menu
 
@@ -72,7 +77,7 @@ elif menu == "Model Characteristics":
 
         st.subheader("Training Metrics per Epoch")
         df_metrics = pd.DataFrame(training_metrics)
-        df_metrics.index = df_metrics.index + 1
+        df_metrics.index += 1
         st.dataframe(df_metrics)
 
     df_history = utils.load_training_history()
@@ -95,8 +100,6 @@ elif menu == "Dataset Characteristics":
     st.write(f"- **Image Size:** {x_train.shape[1]}x{x_train.shape[2]} pixels")
     st.write(f"- **Number of Classes:** {len(np.unique(y_train))}")
 
-    class_names = data.get_class_names()
-
     st.subheader("CIFAR-10 Classes")
     st.write(", ".join([cls.title() for cls in class_names]))
 
@@ -108,3 +111,11 @@ elif menu == "Dataset Characteristics":
     distribution = pd.DataFrame({'Class': [class_names[i].title() for i in unique], 'Count': counts})
 
     visualization.show_class_distribution(distribution)
+
+elif menu == "Team Members":
+    st.header("Group 3")
+    st.write("Here are the members of Group 3 who developed this application:")
+    df_team = pd.DataFrame(team_members)
+    df_team = df_team.rename(columns={"NIM": "ID Number", "Name": "Name"})
+    df_team.index += 1
+    st.table(df_team[["ID Number", "Name"]])
